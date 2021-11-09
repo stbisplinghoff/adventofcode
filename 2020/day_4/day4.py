@@ -17,7 +17,6 @@ validPassports = 0
 for passport in passports:
     if not (len(passport) == 8 or (len(passport) == 7 and "cid" not in passport)):
         continue
-    invalidField = False
     conditions = [int(passport["byr"]) >= 1920 and int(passport["byr"]) <= 2002,
                   int(passport["iyr"]) >= 2010 and int(passport["iyr"]) <= 2020,
                   int(passport["eyr"]) >= 2020 and int(passport["eyr"]) <= 2030,
