@@ -1,5 +1,4 @@
 # Solution to Advent of Code 2020 day 6
-import math
 
 # Read data
 with open("input.txt") as inFile:
