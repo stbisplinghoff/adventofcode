@@ -30,5 +30,5 @@ print("Slope (3,1) - Hits:", run(forest))
 print("Slope (3,1) - Hits:", runfancy(forest))
 
 # Part 2
-print("Solution part 2:", math.prod([run(forest, (l, 1)) for l in range(1, 8, 2)] + [run(forest, (1, 2))]))
+print("Solution part 2:", math.prod([run(forest, (line, 1)) for line in range(1, 8, 2)] + [run(forest, (1, 2))]))
 print("Solution part 2:", math.prod([runfancy(forest, slope) for slope in zip([1, 3, 5, 7, 1], [1, 1, 1, 1, 2])]))
