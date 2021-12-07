@@ -17,9 +17,7 @@ print("Solution for part 1:", fish.size)
 ## Part 2
 # Different approach, as numbers will get too large for handling an array element for each fish
 # Do not store every fish but only number of fish per age
-fishPopulation = {age: 0 for age in range(9)}
-for fish in initialFishState:
-    fishPopulation[fish] += 1
+fishPopulation = {age: initialFishState.count(age) for age in range(9)}
 for day in range(256):
     newFish = fishPopulation[0]
     for age in range(8):
