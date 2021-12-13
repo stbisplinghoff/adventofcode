@@ -10,48 +10,39 @@ for connection in connections:
     cavePaths[connection[0]].append(connection[1])
     cavePaths[connection[1]].append(connection[0])
 
-print(cavePaths)
 
-
-def travel(current, visitedCaves, path, validPathStorage):
+def travel(current, path, validPaths):
     if current == "end":
-        validPathStorage.append(list(path))
+        validPaths.append(list(path))
         return
     for next in cavePaths[current]:
-        if next == next.upper() or next not in visitedCaves:
+        if next == next.upper() or next not in path:
             path.append(next)
-            visitedCaves.append(next)
-            travel(next, visitedCaves, path, validPathStorage)
+            travel(next, path, validPaths)
             path.pop()
-            visitedCaves.pop()
 
 
-def travel2(current, visitedCaves, path, validPathStorage, singleCaveTwiceFlag):
+validPaths = []
+travel("start", ["start"], validPaths)
+print("Solution for part 1:", len(validPaths))
+
+
+def travel2(current, path, validPaths, singleCaveTwiceFlag):
     if current == "end":
-        validPathStorage.append(list(path))
+        validPaths.append(list(path))
         return
     for next in cavePaths[current]:
         if next != "start" and (
-                next == next.upper() or next not in visitedCaves or (next in visitedCaves and not singleCaveTwiceFlag)):
-            if next == next.lower() and next in visitedCaves:
+                next == next.upper() or next not in path or (next in path and not singleCaveTwiceFlag)):
+            if next == next.lower() and next in path:
                 singleCaveTwiceFlag = True
             path.append(next)
-            visitedCaves.append(next)
-            travel2(next, visitedCaves, path, validPathStorage, singleCaveTwiceFlag)
+            travel2(next, path, validPaths, singleCaveTwiceFlag)
             path.pop()
-            visitedCaves.pop()
-            if next == next.lower() and next in visitedCaves:
+            if next == next.lower() and next in path:
                 singleCaveTwiceFlag = False
 
 
 validPaths = []
-travel("start", ["start"], ["start"], validPaths)
-for path in validPaths:
-    print(path)
-print(len(validPaths))
-
-validPaths = []
-travel2("start", ["start"], ["start"], validPaths, False)
-for path in validPaths:
-    print(path)
-print(len(validPaths))
+travel2("start", ["start"], validPaths, False)
+print("Solution for part 2:", len(validPaths))
